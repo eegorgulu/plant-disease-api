@@ -4,7 +4,15 @@ import torch
 import torchvision.transforms as transforms
 import io
 import timm
+import os
+import requests
 
+MODEL_URL = "https://huggingface.co/eegorgulu/plant-disease-convnext/resolve/main/bestmodel.pt"
+
+if not os.path.exists("bestmodel.pt"):
+    print("Model indiriliyor...")
+    r = requests.get(MODEL_URL)
+    open("bestmodel.pt", "wb").write(r.content)
 app = FastAPI()
 
 # Modeli oluştur
